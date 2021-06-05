@@ -25,10 +25,10 @@ export const GlobalProvider = ({ children }) => {
         setLyric({ track_list: res.data.message.body.track_list });
       })
       .catch((err) => console.log(err));
-    console.log(lyric, "lyrics");
+  
   }, []);
 
   return (
-    <GlobalContext.Provider value={lyric}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider value={[lyric, setLyric]}>{children}</GlobalContext.Provider>
   );
 };
