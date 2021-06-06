@@ -29,6 +29,6 @@ export const GlobalProvider = ({ children }) => {
   }, []);
 
   return (
-    <GlobalContext.Provider value={[lyric, setLyric]}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider value={lyric}>{children}</GlobalContext.Provider>
   );
 };

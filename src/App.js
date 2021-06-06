@@ -13,7 +13,7 @@ export default function App() {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Index} />
-              <Route  path="/lyrics" component={Lyrics} />
+              <Route  path="/lyrics/track/:id" component={Lyrics} />
             </Switch>
           </div>
         </>
