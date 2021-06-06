@@ -2,6 +2,7 @@ import React,{useState, useEffect, useContext} from "react";
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Spinner from '../Layout/Spinner'
+import Moment from 'react-moment'
 
 const Lyrics = (props) => {
   const [track, setTrack] = useState({})
@@ -50,6 +51,21 @@ const Lyrics = (props) => {
                 </p>
               </div>
             </div>
+            <ul className='list-group mt-3'>
+              <li className='list-group-item'>
+                <strong>Album ID</strong>: {track.track.album_id}
+              </li>
+              <li className='list-group-item'>
+                <strong>Song Genre</strong>: {track.track.primary_genres.music_genre_list[0].music_genre.music_genre_name}
+              </li>
+              <li className='list-group-item'>
+                <strong>Explicit Words</strong>: {track.track.explixit ===0 ? 'No' : 'Yes'}
+              </li>
+              <li className='list-group-item'>
+                <strong>Release Date</strong>: <Moment format='MM/DD/YY'>{track.track.first_release_date}</Moment>
+              </li>
+
+            </ul>
          </>
       }
   
