@@ -11,27 +11,28 @@ const Lyrics = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${ props.match.params.id}&apikey=${process.env.REACT_APP_MM_KEY}`
+        `https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${
+          props.match.params.id
+        }&apikey=${process.env.REACT_APP_MM_KEY}`
       )
-      .then((res) => {
-        console.log(res.data)
-        let lyrics= res.data.message.body.lyrics
-         setLyrics({ lyrics });
-      
-      
+      .then(res => {
+        let lyrics = res.data.message.body.lyrics;
+        setLyrics({ lyrics });
+        console.log(lyrics)
 
-      return  axios.get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.get?track_id=${ props.match.params.id}&apikey=${process.env.REACT_APP_MM_KEY}`
-      )
+        return axios.get(
+          `https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.get?track_id=${
+            props.match.params.id
+          }&apikey=${process.env.REACT_APP_MM_KEY}`
+        );
       })
-      .then(res =>{
-        console.log(res.data)
-        let track= res.data.message.body.track
-        setTrack({track})
+      .then(res => {
+        let track = res.data.message.body.track;
+        setTrack({ track });
+        console.log(track)
       })
-      .catch((err) => console.log(err));
-   
-  }, []);
+      .catch(err => console.log(err));
+  }, [props.match.params.id]);
   return (
     <>
       {track ===undefined || lyrics === undefined ||
@@ -41,11 +42,11 @@ const Lyrics = (props) => {
             <Link to='/' className='btn btn-dark btn-sm mb-4'>Go back</Link>
             <div className='card'>
               <h5 className='card-header'>
-                {track.track_name} by <span className='text-secondary'>{track.artist_name}</span>
+                {track.track.track_name} by <span className='text-secondary'>{track.track.artist_name}</span>
               </h5>
               <div className='card-body'>
-                <p cllasName='card-text'>
-                  {lyrics.lyrics_body}
+                <p className='card-text'>
+                  {lyrics.lyrics.lyrics_body}
                 </p>
               </div>
             </div>
