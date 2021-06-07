@@ -3,23 +3,25 @@ import axios from 'axios'
 import { GlobalContext } from "../../context";
 const Search =() =>{
   const [trackTitle, setTrackTitle] = useState('')
-  const [userInput, setuserInput]= useState('')
+  const [userInput, setUserInput] = useState("")
+
   const { track_list } = useContext(GlobalContext);
 
-  const  onChange= (e) =>{
-    setuserInput( e.target.value)
+  const  findTrack= (e) =>{
+ setTrackTitle ( e.target.value)
   }
 
   const onSubmit =(e) =>{
     e.preventDefault()
-     setTrackTitle(userInput);
+    
+
   }
 
 
   useEffect(() => {
     axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_track=${trackTitle}&page_size=3&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_MM_KEY}`
+        `https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_track=${trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_MM_KEY}`
       )
       .then((res) => {
         console.log(res.data, 'test')
@@ -41,12 +43,15 @@ const Search =() =>{
              type='text'
               className='form-control form-control-lg'
              placeholder='Song Title ...'
-              name='userInput'
-              value={userInput}
-              onChange={onChange}
+              name='trackTitle'
+              value={trackTitle}
+              onChange={findTrack}
              / >
            </div>
-          <button className='btn btn-primary btn-lg btn-block mt-2' type='submit'>Get track Lyrics</button>
+          <button 
+  
+          className='btn btn-primary btn-lg btn-block mt-2'
+           type='submit'>Get track Lyrics</button>
             
           </form>
         </div>
