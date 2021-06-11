@@ -1,14 +1,26 @@
 import React,{useState, useContext, useEffect} from 'react'
 import axios from 'axios'
-import { GlobalContext } from "../../context";
+import Result from './Result'
+
+
+//intial state
+
+const initialState = {
+  track_list: [],
+  heading: "Search Results",
+  
+  
+};
 const Search =() =>{
   const [trackTitle, setTrackTitle] = useState('')
-  const [userInput, setUserInput] = useState("")
+  const [searchResult, setSearchResult] =useState(initialState)
+ 
 
-  const { track_list } = useContext(GlobalContext);
+ 
 
   const  findTrack= (e) =>{
  setTrackTitle ( e.target.value)
+
   }
 
   const onSubmit =(e) =>{
@@ -25,7 +37,8 @@ const Search =() =>{
       )
       .then((res) => {
         console.log(res.data, 'test')
-       // setTrackTitle({ track_list: res.data.message.body.track_list });
+       setSearchResult({ track_list: res.data.message.body.track_list });
+       console.log(setSearchResult)
       })
       .catch((err) => console.log(err));
   
@@ -55,6 +68,10 @@ const Search =() =>{
             
           </form>
         </div>
+        <div className="row">
+            <Result result={searchResult}  />
+        </div>
+       
     </>
   )
 }
