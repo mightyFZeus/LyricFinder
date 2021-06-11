@@ -55,9 +55,7 @@ const Lyrics = (props) => {
               <li className='list-group-item'>
                 <strong>Album ID</strong>: {track.track.album_id}
               </li>
-              <li className='list-group-item'>
-                <strong>Song Genre</strong>: {track.track.primary_genres.music_genre_list[0].music_genre.music_genre_name}
-              </li>
+        
               <li className='list-group-item'>
                 <strong>Explicit Words</strong>: {track.track.explixit ===0 ? 'No' : 'Yes'}
               </li>
